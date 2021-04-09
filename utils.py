@@ -80,13 +80,13 @@ def data_transforms(args):
             transforms.RandomHorizontalFlip(),
             # transforms.ColorJitter(brightness=0.4, contrast=0.4, saturation=0.4, hue=0.2),
             transforms.ToTensor(),
-            transforms.Normalize(MEAN, STD)
+            transforms.Normalize(MEAN, STD),
         ])
         valid_transform = transforms.Compose([
             transforms.Resize(256),
             transforms.CenterCrop(224),
             transforms.ToTensor(),
-            transforms.Normalize(MEAN, STD)
+            transforms.Normalize(MEAN, STD),
         ])
     else:  # cifar10
         train_transform = transforms.Compose([

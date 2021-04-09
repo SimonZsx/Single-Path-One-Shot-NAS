@@ -207,7 +207,7 @@ def train(args, epoch, train_data, device, model, criterion, optimizer, schedule
         train_data.set_postfix(log=postfix)
 
 
-def validate(args, epoch, val_data, device, model, criterion, supernet, choice=None):
+def validate(args, epoch, val_data, device, model, criterion, supernet=False, choice=None):
     model.eval()
     val_loss = 0.0
     val_top1 = utils.AvgrageMeter()

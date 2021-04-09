@@ -42,7 +42,8 @@ def main():
                                                  num_workers=8, pin_memory=True)
 
     # SinglePath_OneShot
-    choice = [2, 0, 2, 3, 2, 2, 3, 1, 2, 1, 0, 1, 0, 3, 1, 0, 0, 2, 3, 2]
+    choice = [3, 1, 2, 1, 0, 1, 3, 3, 1, 3, 0, 1, 0, 3, 3, 3, 3, 3, 0, 3]
+    #[2, 0, 2, 3, 2, 2, 3, 1, 2, 1, 0, 1, 0, 3, 1, 0, 0, 2, 3, 2]
     model = SinglePath_Network(args.dataset, args.resize, args.classes, args.layers, choice)
     criterion = nn.CrossEntropyLoss().to(device)
     optimizer = torch.optim.SGD(model.parameters(), args.learning_rate, args.momentum, args.weight_decay)

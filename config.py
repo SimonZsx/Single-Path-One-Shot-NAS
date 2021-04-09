@@ -8,7 +8,7 @@ def get_args():
     parser.add_argument('--classes', type=int, default=10, help='dataset classes')
     parser.add_argument('--layers', type=int, default=20, help='batch size')
     parser.add_argument('--num_choices', type=int, default=4, help='number choices per layer')
-    parser.add_argument('--batch_size', type=int, default=96, help='batch size')
+    parser.add_argument('--batch_size', type=int, default=512, help='batch size')
     parser.add_argument('--epochs', type=int, default=600, help='batch size')
     parser.add_argument('--learning_rate', type=float, default=0.025, help='initial learning rate')
     parser.add_argument('--momentum', type=float, default=0.9, help='momentum')

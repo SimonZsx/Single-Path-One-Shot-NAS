@@ -20,7 +20,7 @@ if __name__ == '__main__':
     ckpt_path = os.path.join('snapshots', args.exp_name + '_ckpt_' + "{:0>4d}".format(args.epochs) + '.pth.tar')
     print('Load checkpoint from:', ckpt_path)
     checkpoint = torch.load(ckpt_path, map_location=device)
-    model.load_state_dict(checkpoint['state_dict'], strict=True)
+    model.load_state_dict(checkpoint['state_dict'], strict=False)
     criterion = nn.CrossEntropyLoss().to(device)
 
     # dataset
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     best_choice = list()
     for epoch in range(args.random_search):
         choice = utils.random_choice(args.num_choices, args.layers)
-        top1_acc = validate(args, epoch, val_loader, device, model, criterion, super=True, choice=choice)
+        top1_acc = validate(args, epoch, val_loader, device, model, criterion, supernet=True, choice=choice)
         acc_list.append(top1_acc)
         if best_acc < top1_acc:
             best_acc = top1_acc

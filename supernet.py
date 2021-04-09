@@ -34,8 +34,8 @@ def main():
         val_loader = torch.utils.data.DataLoader(valset, batch_size=args.batch_size,
                                                  shuffle=False, pin_memory=True, num_workers=8)
     elif args.dataset == 'imagenet':
-        train_data_set = datasets.ImageNet(os.path.join(args.data_dir, 'ILSVRC2012', 'train'), train_transform)
-        val_data_set = datasets.ImageNet(os.path.join(args.data_dir, 'ILSVRC2012', 'valid'), valid_transform)
+        train_data_set = datasets.ImageNet(os.path.join(args.data_dir), split='train', transform=train_transform)
+        val_data_set = datasets.ImageNet(os.path.join(args.data_dir), split='val', transform=valid_transform)
         train_loader = torch.utils.data.DataLoader(train_data_set, batch_size=args.batch_size, shuffle=True,
                                                    num_workers=8, pin_memory=True, sampler=None)
         val_loader = torch.utils.data.DataLoader(val_data_set, batch_size=args.batch_size, shuffle=False,
@@ -52,7 +52,7 @@ def main():
                             else (torch.randn(1, 3, 224, 224),), verbose=False)
     # print(model)
     print('Random Path of the Supernet: Params: %.2fM, Flops:%.2fM' % ((params / 1e6), (flops / 1e6)))
-    model = model.to(device)
+    model = torch.nn.DataParallel(model).to(device)
     summary(model, (3, 32, 32) if args.dataset == 'cifar10' else (3, 224, 224))
 
     # train supernet
